@@ -62,8 +62,6 @@ if __name__ == '__main__':
             setpin = str(input("Desired pin code [1234]:") or "1234")
             command = f'AT+PIN{setpin}'.encode()
         print(f"Command to be sent: {command}")
-        pass
-        # conn = serial_setup(connbaud)
-        # # conn = "debug"
-        # send_commands(conn, command)
-        # conn.close()
+        conn = serial_setup(connbaud)
+        send_commands(conn, command)
+        conn.close()
