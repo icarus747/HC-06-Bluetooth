@@ -18,6 +18,7 @@ def send_commands(conn, command):
     print(f'\n\nReturned line: {returned_line}\n\n')
     input("Press Enter to continue...")
 
+
 def baud_logic(setbaud):
     if setbaud == 1200:
         return b'AT+BAUD1'
@@ -40,9 +41,10 @@ def baud_logic(setbaud):
 if __name__ == '__main__':
     connbaud = 9600
     while 1:
+        command = b"AT"
         user_response = int(input(
             "Enter number for programing your HC-06.\n  1. Check Connection\n  2. Check Version\n  "
-            "3. Change BAUD rate\n  4. Change boradcast name\n  5. Change bluetooth pin"))
+            "3. Change BAUD rate\n  4. Change broadcast name\n  5. Change bluetooth pin"))
         connbaud = int(input(f"enter connection baud rate [{connbaud}]:") or connbaud)
         if user_response == 1:
             command = b'AT'
@@ -61,6 +63,7 @@ if __name__ == '__main__':
         if user_response == 5:
             setpin = str(input("Desired pin code [1234]:") or "1234")
             command = f'AT+PIN{setpin}'.encode()
+
         print(f"Command to be sent: {command}")
         conn = serial_setup(connbaud)
         send_commands(conn, command)
